@@ -1,0 +1,34 @@
+name: Compilar Canaima Engine
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Descargando Código
+        uses: actions/checkout@v2
+        with:
+          ref: 'v5.0.129'
+
+      - name: Preparando Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+
+      - name: Instalando Dependencias
+        run: |
+          cd newIDE/app
+          npm install
+
+      - name: Fabricando Canaima Engine 32bits
+        run: |
+          cd newIDE/app
+          npm run dist:ia32
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Entregar Motor Listo
+        uses: actions/upload-artifact@v2
+        with:
+          name: Canaima-Engine-32bits
+          path: newIDE/app/dist/*.exe
