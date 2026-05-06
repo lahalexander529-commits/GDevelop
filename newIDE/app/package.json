@@ -1,5 +1,4 @@
-{
-  name: Compilar Canaima Engine
+name: Compilar Canaima Engine
 on: workflow_dispatch
 
 jobs:
@@ -14,7 +13,7 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Instalando Herramientas de Construccion
+      - name: Instalando Herramientas
         run: |
           npm install -g electron-builder
           cd newIDE/app
@@ -23,7 +22,7 @@ jobs:
       - name: Fabricando Canaima Engine 32bits
         run: |
           cd newIDE/app
-          npx electron-builder --win --ia32 -c.compression=store -c.win.target=portable
+          npx electron-builder --win --ia32 -c.win.target=portable -c.compression=store
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -32,4 +31,3 @@ jobs:
         with:
           name: Canaima-Engine-32bits
           path: newIDE/app/dist/*.exe
-
