@@ -2,15 +2,9 @@
   "name": "canaima-engine",
   "productName": "Canaima Engine",
   "version": "5.0.129",
-  "description": "Motor de juegos Premium optimizado para 32-bits. Exportación Multiplataforma.",
-  "author": "Canaima Engine Community",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron .",
-    "dist:ia32": "electron-builder --win --ia32"
-  },
-  "dependencies": {
-    "electron-is-dev": "1.1.0"
+    "dist:ia32": "electron-builder --win --ia32 -c.compression=store -c.mac.target=null -c.linux.target=null"
   },
   "devDependencies": {
     "electron": "9.4.0",
@@ -18,17 +12,13 @@
   },
   "build": {
     "appId": "com.canaima.engine",
-    "productName": "Canaima Engine Premium Free",
-    "directories": {
-      "buildResources": "resources"
-    },
+    "productName": "Canaima Engine",
     "win": {
-      "target": [
-        {
-          "target": "portable",
-          "arch": ["ia32"]
-        }
-      ]
+      "target": ["portable"],
+      "publish": null
+    },
+    "directories": {
+      "output": "dist"
     }
   }
 }
