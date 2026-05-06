@@ -1,6 +1,8 @@
 {
-  "name": "gdevelop-ide",
-  "version": "0.1.0",
+  "name": "canaima-engine",
+  "productName": "Canaima Engine",
+  "description": "Motor de juegos Premium optimizado para 32-bits y 2GB de RAM. Exportación Multiplataforma activada.",
+  "version": "1.0",
   "private": true,
   "license": "MIT",
   "homepage": ".",
@@ -119,6 +121,7 @@
     "dnd-core": "14.0.1"
   },
   "scripts": {
+    "dist:ia32": "electron-builder --win --ia32",
     "postinstall": "patch-package && cd ../../GDJS && npm install && cd ../newIDE/app && npm run import-resources",
     "import-resources": "npm run make-version-metadata && npm run import-zipped-external-editors && npm run build-theme-resources && npm run make-service-worker && cd scripts && node import-libGD.js && node import-GDJS-Runtime.js && node import-monaco-editor.js && node import-zipped-external-libs.js",
     "make-version-metadata": "cd scripts && node make-version-metadata.js",
@@ -209,4 +212,22 @@
     "not ie <= 11",
     "not op_mini all"
   ]
+  },
+  "build": {
+    "appId": "com.canaima.engine",
+    "productName": "Canaima Engine Premium Free",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["ia32"]
+        },
+        {
+          "target": "portable",
+          "arch": ["ia32"]
+        }
+      ]
+    }
+  }
 }
+
